@@ -22,8 +22,8 @@ check(P,L,[P|L]):- isprime(P).
 pl([]).
 pl([X|List]) :-write(X),write(:),pl(List).
 
-pfactors(X,R,P,R):- X1 is X+1,P > X1,!.
-pfactors(X,L,P,R):- X1 is X+1,P < X1,write(P),write( : ),write(passed1),write(R),X mod P =:=0,write(passed1),nl,isprime(P),P1 is P+1,pfactors(X,L,P1,[P|R]).
-pfactors(X,L,P,R):- X1 is X+1,P < X1,write(passed2),X mod P =\=0,write(passed2),write(R),nl,P1 is P+1,pfactors(X,L,P1,R).
-pfactors(X,L,P,R):- X1 is X+1,P < X1,write(passed3),X mod P =:=0,write(passed3),write(R),nl,\+isprime(P),P1 is P+1,pfactors(X,L,P1,R).
+pfactors(_,R,1,R):-!.
+pfactors(X,L,P,R):- X mod P =:=0,isprime(P),P1 is P-1,pfactors(X,L,P1,[P|R]),!.
+pfactors(X,L,P,R):- X mod P =\=0,P1 is P-1,pfactors(X,L,P1,R),!.
+pfactors(X,L,P,R):- X mod P =:=0,\+isprime(P),P1 is P-1,pfactors(X,L,P1,R),!.
 
