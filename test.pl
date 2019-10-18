@@ -27,3 +27,6 @@ pfactors(X,L,P,R):- X mod P =:=0,isprime(P),P1 is P-1,pfactors(X,L,P1,[P|R]),!.
 pfactors(X,L,P,R):- X mod P =\=0,P1 is P-1,pfactors(X,L,P1,R),!.
 pfactors(X,L,P,R):- X mod P =:=0,\+isprime(P),P1 is P-1,pfactors(X,L,P1,R),!.
 
+odd(0):-!.
+odd(N):- N mod 2 =:=0,N1 is N-1,odd(N1),!.
+odd(N):- N mod 2 =\=0,write(N),N1 is N-1,odd(N1).
